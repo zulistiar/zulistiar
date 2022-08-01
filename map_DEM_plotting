@@ -1,0 +1,16 @@
+clear
+clc
+clf
+hold on
+% 
+
+%% X and Y linespace based on the longitude and latitude of the area
+
+im = imread('File_Name.tif'); %% load the image file
+im=flipud(im); %% reverse the axis
+X=linspace(-11,8,size(im,1)); %% axis for longitude
+Y=linspace(94,140,size(im,2)); %% axis for latitude
+dem(Y,X,im,'Contrast',0.2,'LCut',0.5,'km','FontBold','NoValue',min(min(im)),'NaNColor',[0.8 0.8 0.8],'LatLon','landcolor',landcolor,'seacolor',seacolor) %% DEM 코드를 이용한 지도 그리기 (dem.m 파일이 있어야함)
+
+set(findall(gcf,'type','text'),'FontName','arial')
+set(gcf,'color',[1 1 1]);
