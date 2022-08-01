@@ -1,0 +1,10 @@
+clear
+clc
+clf
+
+hold on
+%draw map 
+m_proj('mercator','long',[92 141],'lat',[-12 9]);
+m_gshhs_h('linewidth',0.5,'color','k'); m_grid('tickdir','out')         
+ m_grid('tickdir','out')       
+
