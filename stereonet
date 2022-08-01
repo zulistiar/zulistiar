@@ -1,0 +1,33 @@
+%% plot the frame of stereonet
+Stereonet(0,90*pi/180,5*pi/180,1);
+
+
+%% 1 If data is compiled as dip direction and dip angle, not strike and dip use this code
+% data=load('file_name.txt'); %depth, dip direction(deg), dip(deg)
+% data2=[data(:,1),data(:,2)+180, data(:,3)]; %depth, pole azimuth(deg), dip(deg)
+
+
+%% 2 If data is compiled as strike and dip, use this code
+data=load('file_name.txt'); % strike(deg), dip(deg)
+data2=[data(:,1)+270, data(:,2)]; % pole azimuth(deg), dip(deg)
+
+
+%% 3 To adjust the pole angle within 360 degree
+data3=[0 0]; % give empty matrix to fill it as an ALTE
+for i=1:1:size(data2,1)
+    if data2(i,1)>360
+        data3(end+1,:)=[data2(i,1)-360,90-data2(i,2)]; % trend of pole(deg), plunge of pole(deg)
+    else
+        data3(end+1,:)=[data2(i,1),90-data2(i,2)]; % trend of pole(deg), plunge of pole(deg)
+    end
+end
+data3(1,:)=[]; %Ready to plot the poles on stereonet
+
+
+%% 4 Plot the fracture pole on stereonet
+
+for j=1:1:size(data3,1)
+    hold on
+    [xp,yp]=StCoordLine(data3(j,1)*pi/180,data3(j,2)*pi/180,1); % (trend of line in radian, plunge of line in radian, 1)
+    plot(xp,yp,'.b','MarkerSize',10) % color is blue
+end
