@@ -1,0 +1,18 @@
+function []=scale_bar(sp_lat,sp_long,km)
+sp=[sp_lat,sp_long];
+for i=0:0.001:30
+    ep=[sp_lat,sp_long+i];
+    dist=lldistkm(sp,ep);%using lldistkm as a main function
+
+    if dist<km
+
+    elseif dist>=km
+     plot([sp(1,2),ep(1,2)],[sp(1,1),ep(1,1)],'-k','linewidth',5)
+     break
+    end
+
+end
+
+%% following with this code for any map plot
+
+ scale_bar(0.2,125,100);% it consists the lat and lot of scale location. The distance of the scale put as the last parameter (in km)
